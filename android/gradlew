@@ -1,4 +1,0 @@
-#!/bin/bash
-echo "Gradle Wrapper - Bu bir placeholder"
-echo "Gerçek Gradle kurulumu için Android Studio gerekli"
-echo "Veya GitHub Actions'ta otomatik kurulacak"

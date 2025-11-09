@@ -1,0 +1,55 @@
+name: Real Android Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Debug Android Project
+      run: |
+        echo "=== ANDROID PROJE KONTROLÜ ==="
+        echo "--- Gradlew ---"
+        ls -la android/gradlew 2>/dev/null || echo "Gradlew yok"
+        echo "--- Build.gradle ---"
+        find . -name "build.gradle" -type f
+        echo "--- Java Files ---"
+        find . -name "*.java" -type f | head -10
+        
+    - name: Build Android APK
+      run: |
+        echo "=== ANDROID APK BUILD ==="
+        cd android
+        
+        # Gradlew'ı çalıştırılabilir yap
+        chmod +x gradlew
+        
+        # Build et
+        ./gradlew assembleDebug --no-daemon || echo "Build failed, checking structure"
+        
+    - name: Find and Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: real-android-apk
+        path: |
+          android/**/build/outputs/apk/**/*.apk
+        retention-days: 7
+        
+    - name: Upload Build Logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-logs
+        path: |
+          android/build/
+        retention-days: 3

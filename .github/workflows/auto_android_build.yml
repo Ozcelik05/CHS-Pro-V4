@@ -1,0 +1,45 @@
+name: Auto Android Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Android Build Environment
+      uses: android-actions/setup-android@v3
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        
+    - name: Generate Real Gradle Wrapper
+      run: |
+        echo "=== GERÇEK GRADLE KURULUMU ==="
+        cd android
+        
+        # Gradle wrapper oluştur
+        wget -q https://services.gradle.org/distributions/gradle-7.5-bin.zip
+        unzip -q gradle-7.5-bin.zip
+        ./gradle-7.5/bin/gradle wrapper --gradle-version 7.5
+        
+        chmod +x gradlew
+        ./gradlew --version
+        
+    - name: Build APK
+      run: |
+        cd android
+        ./gradlew assembleDebug --no-daemon
+        
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: real-android-apk
+        path: android/app/build/outputs/apk/debug/*.apk
+        retention-days: 7
