@@ -10,32 +10,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Debug - List files
-      run: |
-        echo "=== Project Structure ==="
-        ls -la
-        echo "=== Build Scripts ==="
-        find . -name "*.sh" -type f | head -10
-        
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: Create Resources
+    - name: Create Proper APK
       run: |
-        mkdir -p res/values
-        echo '<?xml version="1.0" encoding="utf-8"?><resources><string name="app_name">CHS Pro V4</string></resources>' > res/values/strings.xml
+        chmod +x build_proper_apk.sh
+        ./build_proper_apk.sh
         
-    - name: Run Easy Build
-      run: |
-        chmod +x easy_build.sh
-        ./easy_build.sh || echo "Easy build completed"
-        
-    - name: Upload APK Artifact
+    - name: Upload Proper APK
       uses: actions/upload-artifact@v4
       with:
-        name: chs-pro-apk
-        path: "*.apk"
+        name: chs-pro-proper-apk
+        path: chs_pro_proper.apk
         retention-days: 5
+        
+    - name: Test APK Structure
+      run: |
+        echo "=== APK TEST ==="
+        file chs_pro_proper.apk
+        unzip -l chs_pro_proper.apk | head -10
