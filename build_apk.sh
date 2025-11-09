@@ -14,8 +14,8 @@ echo "APK oluşturuluyor..."
 aapt package -f -M AndroidManifest.xml -S ../../res -I $PREFIX/share/java/android.jar -F chs_pro_v4.apk
 
 # DEX dosyası oluştur (basit)
-echo "nop" > classes.dex
-aapt add chs_pro_v4.apk classes.dex
+echo "nop" > classes2.dex
+aapt add chs_pro_v4.apk classes2.dex
 
 # İmzala
 echo "APK imzalanıyor..."

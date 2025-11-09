@@ -1,11 +1,3 @@
-#!/bin/bash
-echo "=== BASIT APK OLUSTURMA ==="
-echo "1. Dosyalari hazirliyorum..."
-mkdir -p build/classes
-mkdir -p res/values
-
-echo "2. Basit manifest olusturuyorum..."
-cat > AndroidManifest.xml << 'MANIFEST'
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chspro">
@@ -18,10 +10,3 @@ cat > AndroidManifest.xml << 'MANIFEST'
         </activity>
     </application>
 </manifest>
-MANIFEST
-
-echo "3. APK olusturuyorum..."
-zip -r chs_pro_simple.apk AndroidManifest.xml res/ build/ > /dev/null 2>&1
-
-echo "✅ BASIT APK HAZIR: chs_pro_simple.apk"
-ls -la *.apk
