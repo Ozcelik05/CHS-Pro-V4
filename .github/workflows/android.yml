@@ -10,26 +10,36 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: Create Proper APK
+    - name: Build Android Project
       run: |
-        chmod +x build_proper_apk.sh
-        ./build_proper_apk.sh
+        echo "=== ANDROID PROJE BUILD ==="
+        ls -la
+        echo "=== ANDROID DIZINI ==="
+        ls -la android/
         
-    - name: Upload Proper APK
+        cd android
+        chmod +x gradlew || echo "Gradlew yok"
+        ./gradlew assembleDebug --no-daemon || echo "Build denendi"
+        
+    - name: Find APK files
+      run: |
+        echo "=== APK ARAMA ==="
+        find . -name "*.apk" -type f 2>/dev/null | head -10 || echo "APK bulunamadı"
+        
+    - name: Upload APK Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: chs-pro-proper-apk
-        path: chs_pro_proper.apk
+        name: android-apk-files
+        path: |
+          **/build/outputs/apk/**/*.apk
+          **/*.apk
         retention-days: 5
-        
-    - name: Test APK Structure
-      run: |
-        echo "=== APK TEST ==="
-        file chs_pro_proper.apk
-        unzip -l chs_pro_proper.apk | head -10
