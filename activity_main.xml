@@ -1,0 +1,75 @@
+<?xm<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sohbet"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnCall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sesli Arama"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnVideoCall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Arama"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Galeri"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kamera"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Konum"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rehber"
+            android:layout_marginBottom="8dp"/>
+
+    </LinearLayout>
+</ScrollView>l version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CHS Pro V4 Çalışıyor!"
+        android:textSize="24sp" />
+        
+</LinearLayout>
